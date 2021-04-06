@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background-color: #1b2029;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+main{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /*alinha no eixo y*/
+    justify-content: center;/*alinha no eixo x*/
+}
+
+main h1{
+    color: #8800fe;
+    font-size: 3rem;    /*3 rem equivale a 3x o tamanho da fonte definida no html, não foi definido tamanho de fonte no html, porém, o padrão de fonte no html é 16px, portanto,nesse caso, 3rem = 48px*/
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+main .social-media{
+    display: flex;
+    align-content: center;
+}
+
+main .social-media a{
+    text-decoration: none;
+}
+
+main .social-media img{
+    width: 36px;
+    margin-left: 3rem;
+}
+
+main .social-media a:first-child img{
+    margin-left: 0px;   /*elimina a margem esquerda da imagem do google (que é a imagem da primeira tag <a> (first child) da classe .social-media*/
+}
+/*Exemplo: main .social-media a:nth-child(4) img{}  -  nesse caso, eu estaria me referindo à quarta tag <a> da classe .social-media*/
+
+main .alternative{
+    margin-top: 1rem;
+}
+
+main .alternative span{
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.3);
+    position: relative; /*a posição aqui é relative porque os pseudo elementos after e before precisam ter position absolute*/
+}
+
+main .alternative span::before, main .alternative span::after{
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100px;
+    bottom: 50%;    /*esse bottom coloca as linhas alinhadas com a <span>*/
+    right: 50px;    /*move as linhas 50px para a direita em relação à span*/
+    background: rgba(255,255,255,0.3);
+}
+
+main .alternative span::after{
+    left: 50px; /*move as linhas 50px para a esquerda em relação à span*/
+}
+
+main form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main form label{
+    display: flex;
+    flex-direction: column;
+}
+
+main form label span{
+    font-size: 1.1rem;
+    margin-top: 2rem;
+}
+
+main form input{
+    background-color: #161923;
+    width: 300px;
+    height: 50px;
+    padding: 0 0.5rem;
+    margin-top: 1rem;
+    outline: none;
+    color: rgb(166, 166, 166);
+    font-size: 1rem;
+    border: 1px solid #040b18;
+    border-radius: 8px;
+}
+
+main form input[type="submit"]{ /*o programa identifica todos os inputs (que estiverem dentro da tag <form) que forem do tipo "submit"; se mudasse para type="password" o programa selecionaria o input onde coloca a senha*/
+    cursor: pointer;
+    width: 50%;
+    margin-top: 4rem;
+    border: none;
+    border-radius: 32px;
+    background-color: #6c63ff;
+    color: white;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+main form input[type="submit"]:hover{
+    background-color: #5952d4;
+}
+
+section.images{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 4rem;
+}
+
+section.images img{
+    width: 100%;
+}
+
+section.images .circle{
+    position: absolute; /*posiciona em relação ao elemento pai que tiver uma position definida (position relative), nesse caso, o elemento pai (.images) não tem tamanho definido, então ele vai se posicionar em relação ao body*/
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(45deg, #e8cbc0, #636fa4);
+    z-index: -1;    /*o z-index só funciona para elementos que possuam a propriedade "position"*/
+    
+    clip-path: circle(40% at right 80%);  /*essa propriedade "recorta" o elemento no formato especificado e posiciona na posição especificada (80% faz referência ao eixo y, 0% é o topo e 100% é a parte mais baixa do eixo)*/
+}
+
+
+/*RESPONSIVIDADE*/
+
+@media only screen and (min-width: 900px) and (max-width: 1200px){
+    section.images img{
+        width: 110%;
+    }
+
+    section.images .circle{
+        clip-path: circle(35% at right 80%);
+    }
+}
+
+@media only screen and (max-width: 900px){
+    section.images{
+       display: none; 
+       visibility: hidden;
+    }
+
+    main{
+        width: 100vw;
+    }
+}
+
+/*para celulares*/
+@media only screen and (max-width: 450px){
+    main h1{
+        font-size: 2rem;
+    }
+
+    main .alternative  span{
+        font-size: 0.8rem;
+    }
+
+    main form label span, main form input[type="submit"]{
+        font-size: 1rem;
+    }
+}
